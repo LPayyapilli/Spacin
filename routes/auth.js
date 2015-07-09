@@ -16,60 +16,65 @@ var isAuthenticated = function(req, res, next) {
 
 module.exports = function(passport) {
 
-  /* GET login page. */
-  router.get('/', function(req, res) {
-    // Display the Login page with any flash message, if any
-   res.status(200);
-   res.end();
+  // /* GET login page. */
+  // router.get('/', function(req, res) {
+  //   // Display the Login page with any flash message, if any
+  //  res.status(200);
+  //  res.end();
+  // });
+
+  router.post('/login', function(req, res) {
+    console.log(req.body);
+    res.send(req.body);
   });
 
   /* Handle Login POST */
-  router.post('/login', passport.authenticate('login'), function(req, res) {
-    res.status(200);
-    res.end();
-  });
+  // // router.post('/login', passport.authenticate('login'), function(req, res) {
+  // //   // res.status(200);
+  // //   // res.end();
+  // // });
 
-  /* Handle Registration POST */
-  router.post('/signup', passport.authenticate('signup'), function(req, res) {
-    res.status(200);
-    res.end();
-    });
-  });
+  // /* Handle Registration POST */
+  // router.post('/signup', passport.authenticate('signup'), function(req, res) {
+  //   res.status(200);
+  //   res.end();
+  //   });
+  // };
 
-  /* GET Profile Page */
-  router.get('/user', isAuthenticated, function(req, res) {
-    res.send(req.user);
-  });
+  // /* GET Profile Page */
+  // router.get('/user', isAuthenticated, function(req, res) {
+  //   res.send(req.user);
+  // });
 
-  /* Handle Logout */
-  router.get('/signout', function(req, res) {
-    req.logout();
-    res.redirect('/');
-  });
+  // /* Handle Logout */
+  // router.get('/signout', function(req, res) {
+  //   req.logout();
+  //   res.redirect('/');
+  // });
 
 
-  /* GET Patch User Page */
-  router.get('/patch/user', isAuthenticated, function(req, res) {
-    res.render('patchUser', {
-      user: req.user,
-      // message: req.flash('message')
-    });
-  });
+  // /* GET Patch User Page */
+  // router.get('/patch/user', isAuthenticated, function(req, res) {
+  //   res.render('patchUser', {
+  //     user: req.user,
+  //     // message: req.flash('message')
+  //   });
+  // });
 
-  /* PATCH user */
-  router.post('/patch/user', isAuthenticated, function(req, res) {
-    User.findOneAndUpdate({
-      username: req.user.username
-    }, req.body, function(err, user) {
-      if (err) {
-        console.log(err);
-        res.status(404);
-        res.end();
-      } else {
-        res.redirect('/auth/patch/user');
-      }
-    });
-  });
+  // /* PATCH user */
+  // router.post('/patch/user', isAuthenticated, function(req, res) {
+  //   User.findOneAndUpdate({
+  //     username: req.user.username
+  //   }, req.body, function(err, user) {
+  //     if (err) {
+  //       console.log(err);
+  //       res.status(404);
+  //       res.end();
+  //     } else {
+  //       res.redirect('/auth/patch/user');
+  //     }
+  //   });
+  // });
 
 
   return router;

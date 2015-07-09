@@ -22,8 +22,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
+// app.use('/', routes);
+// app.use('/users', users);
+
+
+// Login Route
+var loginRoute = require('./routes/auth.js')
+app.use('/auth', loginRoute)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -31,6 +36,8 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
+
 
 // error handlers
 
@@ -55,6 +62,8 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+
 
 
 module.exports = app;
