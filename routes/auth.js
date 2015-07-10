@@ -23,34 +23,28 @@ module.exports = function(passport) {
   //  res.end();
   // });
 
-  router.post('/login', function(req, res) {
-    console.log(req.body);
-    res.send(req.body);
+   /* Handle Login POST */
+  router.post('/login', passport.authenticate('login'), function(req, res) {
+    res.status(200);
+    res.end();
   });
-
-  /* Handle Login POST */
-  // // router.post('/login', passport.authenticate('login'), function(req, res) {
-  // //   // res.status(200);
-  // //   // res.end();
-  // // });
-
-  // /* Handle Registration POST */
-  // router.post('/signup', passport.authenticate('signup'), function(req, res) {
-  //   res.status(200);
-  //   res.end();
-  //   });
-  // };
+  /* Handle Registration POST */
+  router.post('/signup', passport.authenticate('signup'), function(req, res) {
+    res.status(200);
+    res.end();
+  });
 
   // /* GET Profile Page */
   // router.get('/user', isAuthenticated, function(req, res) {
   //   res.send(req.user);
   // });
 
-  // /* Handle Logout */
-  // router.get('/signout', function(req, res) {
-  //   req.logout();
-  //   res.redirect('/');
-  // });
+  /* Handle Logout */
+  router.get('/signout', function(req, res) {
+    req.logout();
+    res.status(202);
+    res.end();
+  });
 
 
   // /* GET Patch User Page */

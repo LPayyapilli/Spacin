@@ -12,7 +12,7 @@ var userSchema = new mongoose.Schema({
   },
   fullName: {
     type: String,
-    required: true
+    // required: true
   },
   username: {
     type: String,
@@ -29,7 +29,8 @@ var userSchema = new mongoose.Schema({
     required: false
   },
   password: {
-    type: String
+    type: String,
+    required: true
   },
   following: [],
   followedBy: [],
@@ -38,6 +39,7 @@ var userSchema = new mongoose.Schema({
   },
   zip: {
     type: String,
+    required: true
   },
   profilePicture: {
     type: String,
