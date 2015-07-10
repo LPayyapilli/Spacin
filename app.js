@@ -1,3 +1,4 @@
+require('dotenv').load();
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -8,7 +9,8 @@ var cors = require('cors');
 var passport = require('passport');
 var express_session = require('express-session');
 var mongoose = require('mongoose');
-var config = require('config');
+var config = require('./config');
+
 
 var app = express();
 
