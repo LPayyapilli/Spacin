@@ -1,12 +1,10 @@
 var express = require('express');
 var router = express.Router();
-
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user.js');
-var Status = require('../models/status.js');
 var async = require('async');
-var Picture = require('../models/picture.js');
+var Space = require('../models/space.js');
 
 var isAuthenticated = function(req, res, next) {
   // if user is authenticated in the session, call the next() to call the next request handler
@@ -18,8 +16,13 @@ var isAuthenticated = function(req, res, next) {
   res.redirect('/');
 }
 
-/* GET All Users*/
+/* GET your user page */
 router.get('/', isAuthenticated, function(req, res) {
+  res.send(req.user);
+});
+
+/* GET All Users*/
+router.get('/users', isAuthenticated, function(req, res) {
   User.find({})
   .select('-password')
   .exec(function(error, userList) {
@@ -136,8 +139,8 @@ router.get('/makeBackgroundPicture/:src', isAuthenticated, function(req, res) {
 //   });
 // });
 
-/* GET User */
-router.get('/:username', isAuthenticated, function(req, res) {
+/* GET User's Spaces */
+router.get('/:username/spaces', isAuthenticated, function(req, res) {
   User.findOne({
     username: req.params.username
   })
@@ -148,29 +151,17 @@ router.get('/:username', isAuthenticated, function(req, res) {
       res.status(404);
       res.end()
     }
-
     Spaces.find({
       _creator: req.params.username
     })
     .sort('-postedAt')
-    .exec( function(error, statusList) {
+    .exec( function(error, spaceList) {
       if (error) {
         console.log(error);
         res.status(404);
         res.end();
       }
-
-      Picture.find({
-        _creator: req.params.username
-      })
-      .sort('-postedAt')
-      .exec( function(error, pictures) {
-        if (error) {
-          console.log(error);
-          res.status(404);
-          res.end();
-        }
-        res.send({pictures: pictures, spaces: spaces, otherUser:otherUser})
+        res.send({spaceList: spaceList, otherUser:otherUser})
       });
     });
   });

@@ -39,6 +39,9 @@ app.use('/auth', loginRoute);
 var userRoutes = require('./routes/users.js');
 app.use('/user', userRoutes);
 
+var spaceRoutes = require('./routes/spaces.js');
+app.use('/space', spaceRoutes);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
