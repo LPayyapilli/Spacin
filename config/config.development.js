@@ -6,6 +6,6 @@ config.servePort = 3000;
 
 config.mongo = {};
 
-config.mongo.dburl = 'mongodb://lukepayyapilli:Thesmart5@ds041871.mongolab.com:41871/clarkedb'
+config.mongo.dbUrl = 'mongodb://lukepayyapilli:Thesmart5@ds041871.mongolab.com:41871/clarkedb'
 
 module.exports = config;

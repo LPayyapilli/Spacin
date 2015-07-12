@@ -13,7 +13,7 @@ var config = require('./config');
 
 
 var app = express();
-
+console.log(config.mongo.dbUrl);
 mongoose.connect(config.mongo.dbUrl);
 
 
@@ -35,6 +35,9 @@ initPassport(passport);
 // Login Route
 var loginRoute = require('./routes/auth.js')(passport);
 app.use('/auth', loginRoute);
+
+var userRoutes = require('./routes/users.js');
+app.use('/user', userRoutes);
 
 
 // catch 404 and forward to error handler
