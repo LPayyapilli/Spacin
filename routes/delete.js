@@ -49,19 +49,19 @@ router.delete('/space/:spaceID', isAuthenticated, function(req, res) {
 });
 
 /* Delete Conversation */
-router.delete('/convo/:convoID', isAuthenticated, function(req, res) {
-  Conversation.remove({
-    _id: req.params.convoID
-  })
-  .exec(function(error) {
-    if (error) {
-      console.log(error);
-      res.status(404);
-      res.end();
-    }
-    res.status(204);
-    res.end();
-  });
-});
+// router.delete('/convo/:convoID', isAuthenticated, function(req, res) {
+//   Conversation.remove({
+//     _id: req.params.convoID
+//   })
+//   .exec(function(error) {
+//     if (error) {
+//       console.log(error);
+//       res.status(404);
+//       res.end();
+//     }
+//     res.status(204);
+//     res.end();
+//   });
+// });
 
 module.exports = router
