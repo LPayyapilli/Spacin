@@ -22,7 +22,7 @@ mongoose.connect(config.mongo.dbUrl);
 app.use(cors({origin:'http://localhost:5000', credentials: true}));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+// app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser('helloWorld'));
 app.use(express_session({secret: 'helloWorld', resave: false, saveUninitialized: true}));
 app.use(passport.initialize());

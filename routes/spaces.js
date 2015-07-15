@@ -16,6 +16,7 @@ var isAuthenticated = function(req, res, next) {
   // if user is authenticated in the session, call the next() to call the next request handler
   // Passport adds this method to request object. A middleware is allowed to add properties to
   // request and response objects
+  console.log(req);
   if (req.isAuthenticated())
     return next();
   // if the user is not authenticated then redirect him to the login page
@@ -31,7 +32,9 @@ router.post('/new', isAuthenticated, function(req, res) {
             newSpace.name = req.body.name;
             newSpace._creator = req.user.username;
             newSpace.postedAt = new Date();
+            if (req.body.pictures) {
             newSpace.pictures = req.body.pictures;
+            }
             newSpace.address.number = req.body.address.number;
             newSpace.address.street = req.body.address.street;
             newSpace.address.state = req.body.address.state;
@@ -49,22 +52,36 @@ router.post('/new', isAuthenticated, function(req, res) {
                 res.end();
             }
           });
-        };
+        });
 /////////////////////GET All Spaces/////////////////////
 ////////////////////////////////////////////////////////
 router.get('/all', isAuthenticated, function(req, res) {
-  Spaces.find({
-      _creator: req.user.username
+  Space.find({
+      _creator: req.user._id
     })
     .sort('-postedAt')
-    .exec( function(error, spaceList) {
+    .exec( function(error, spaces) {
       if (error) {
         console.log(error);
         res.status(404);
         res.end();
       }
-      res.send({spaceList: spaceList
-    });
+      res.send(spaces);
+  });
+});
+
+/////////////////////GET One Space//////////////////////
+////////////////////////////////////////////////////////
+router.get('/_id', isAuthenticated, function(req, res) {
+  Space.findOne({
+    _id: req.params._id
+  }).exec( function(error, space) {
+    if (error) {
+      console.log(error);
+      res.status(404);
+      res.end();
+    }
+    res.send(spaces);
   });
 });
 
