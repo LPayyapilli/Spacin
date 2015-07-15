@@ -24,37 +24,9 @@ var isAuthenticated = function(req, res, next) {
 
 /* Create a Space */
 
-AWS.config.update({
-    accessKeyId: aws_access_key,
-    secretAccessKey: aws_secret_key
-});
-
-var s3 = new AWS.S3();
-
-router.use(bodyParser({uploadDir:'./uploads'}));
-
-router.use(multer({
-  limits : { fileSize:10000000 },
-  rename: function (pictures, src) {
-    return src.replace(/\W+/g, '-').toLowerCase();
-  }
-}));
-
-
 router.post('/new', isAuthenticated, function(req, res) {
-  if (req.files !== undefined) {
-    fs.readFile(req.files.thumbnail.path, function(err, data) {
-      var params = {
-        Bucket: 'clarkedbteer',
-        Key: req.files.thumbnail.name,
-        Body: data
-      };
-    s3.putObject(params, function (perr, pres) {
-      if (perr) {
-        console.log("Error uploading data: ", perr);
-      } else {
-        console.log("Successfully uploaded data to clarkedbteer");
-          var newSpace = new Space();
+            var newSpace = new Space();
+
             newSpace.caption = req.body.caption;
             newSpace.name = req.body.name;
             newSpace._creator = req.user.username;
@@ -78,7 +50,24 @@ router.post('/new', isAuthenticated, function(req, res) {
             }
           });
         };
-      });
+/////////////////////GET All Spaces/////////////////////
+////////////////////////////////////////////////////////
+router.get('/all', isAuthenticated, function(req, res) {
+  Spaces.find({
+      _creator: req.user.username
+    })
+    .sort('-postedAt')
+    .exec( function(error, spaceList) {
+      if (error) {
+        console.log(error);
+        res.status(404);
+        res.end();
+      }
+      res.send({spaceList: spaceList
     });
-  };
+  });
 });
+
+
+
+module.exports = router;

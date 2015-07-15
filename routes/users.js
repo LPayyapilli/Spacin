@@ -1,7 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var express = require('express');
-var router = express.Router();
 var User = require('../models/user.js');
 var async = require('async');
 var Space = require('../models/space.js');
@@ -140,7 +138,7 @@ router.get('/makeBackgroundPicture/:src', isAuthenticated, function(req, res) {
 // });
 
 /* GET User's Spaces */
-router.get('/:username/spaces', isAuthenticated, function(req, res) {
+router.get('/all', isAuthenticated, function(req, res) {
   User.findOne({
     username: req.params.username
   })
@@ -149,7 +147,7 @@ router.get('/:username/spaces', isAuthenticated, function(req, res) {
     if (error) {
       console.log(error);
       res.status(404);
-      res.end()
+      res.end();
     }
     Spaces.find({
       _creator: req.params.username
@@ -165,7 +163,6 @@ router.get('/:username/spaces', isAuthenticated, function(req, res) {
       });
     });
   });
-});
 
 
 // router.post('/follow/:otherUser', isAuthenticated, function(req, res, next) {

@@ -13,7 +13,6 @@ var config = require('./config');
 
 
 var app = express();
-console.log(config.mongo.dbUrl);
 mongoose.connect(config.mongo.dbUrl);
 
 
