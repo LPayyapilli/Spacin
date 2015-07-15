@@ -3,8 +3,8 @@ var router = express.Router();
 var User = require('../models/user.js');
 // var Status = require('../models/status.js');
 var Picture = require('../models/picture.js');
-var Comment = require('../models/comment.js');
-var Conversation = require('../models/conversation.js');
+
+// var Conversation = require('../models/conversation.js');
 
 var isAuthenticated = function(req, res, next) {
   if (req.isAuthenticated()){

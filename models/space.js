@@ -30,15 +30,6 @@ var pictureSchema = new mongoose.Schema({
     type: String,
     ref: 'User'
   },
-  likes: {
-    type: Number,
-    required: true
-  },
-  likers: [],
-  _creator: {
-    type: String,
-    ref: 'User'
-  },
   postedAt: {
     type: Date,
     required: true
