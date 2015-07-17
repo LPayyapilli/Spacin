@@ -8,7 +8,6 @@ module.exports = function(passport){
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
         function(req, username, password, done) {
-            console.log(username);
             findOrCreateUser = function(){
                 // find a user in Mongo with provided username
                 User.findOne({ 'username' :  username }, function(err, user) {
@@ -31,8 +30,9 @@ module.exports = function(passport){
                         newUser.email = req.param('email');
                         newUser.firstName = req.param('firstname');
                         newUser.lastName = req.param('lastname');
+                        newUser.zip = req.param('zip');
                         // newUser.fullName =req.param('firstName') + " " + req.param('lastName');
-
+                        console.log(newUser);
                         // save the user
                         newUser.save(function(err) {
                             if (err){
@@ -47,7 +47,7 @@ module.exports = function(passport){
             };
             // Delay the execution of findOrCreateUser and execute the method
             // in the next tick of the event loop
-            // process.nextTick(findOrCreateUser);
+            process.nextTick(findOrCreateUser);
         })
     );
 

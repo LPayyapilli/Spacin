@@ -28,114 +28,38 @@ router.get('/users', isAuthenticated, function(req, res) {
   });
 });
 
-/* GET to Profile Picture */
-router.get('/makeProfilePicture/:src', isAuthenticated, function(req, res) {
+/* PATCH to Profile Picture */
+router.post('/newProfPic', isAuthenticated, function(req, res) {
   User.findOneAndUpdate({
        username: req.user.username
-   },{profilePicture: req.params.src},function(error, picture) {
+   },{profilePicture: req.body.pic},function(error, user) {
     if (error) {
       console.log(error);
       res.status(404);
       res.end();
      }
      else {
-      res.status(200);
-      res.end();
+      res.send(user);
     }
    });
 });
 
-/* GET Background Picture */
+/* PATCH to Background Picture */
 
-router.get('/makeBackgroundPicture/:src', isAuthenticated, function(req, res) {
+router.post('/newBackPic', isAuthenticated, function(req, res) {
   User.findOneAndUpdate({
        username: req.user.username
-   },{backgroundPicture: req.params.src},function(error, picture) {
+   },{backgroundPicture: req.body.pic},function(error, user) {
     if (error) {
       console.log(error);
       res.status(404);
       res.end();
      }
      else {
-      res.status(200);
-      res.end();
+      res.send(user);
     }
    });
 });
-
-
-/* GET All followers*/
-// router.get('/followers', isAuthenticated, function(req, res) {
-//   User.findOne({username: req.user.username},function(error, user){
-//     if (error) {
-//       console.log(error);
-//       res.status(404);
-//       res.end();
-//     } else {
-//       var array = [];
-//       var length = 0;
-//       var followLength = user.followedBy.length;
-//       if (followLength > 0){
-//         for (var i = 0;i<followLength;i++) {
-//           User.findOne({username: user.followedBy[i]},function(error, follower) {
-//             if (error) {
-//               console.log(error);
-//               followLength = followLength - 1;
-//             } else {
-//               if (follower !== null) {
-//               array.push(follower);
-//             }
-//             length +=1;
-//               if(length === followLength){
-//                 res.send(array);
-//               }
-//             }
-//           });
-//         }
-//       }else {
-//         res.status(404);
-//         res.end();
-//       }
-//     }
-//   });
-// });
-
-/* GET who I follow*/
-// router.get('/followings', isAuthenticated, function(req, res) {
-//   User.findOne({username: req.user.username},function(error, user){
-//     if (error) {
-//       console.log(error)
-//       res.status(404);
-//       res.end();
-//     } else {
-//       var array = [];
-//       var length = 0;
-//       var followLength = user.following.length;
-//       if (followLength > 0){
-//         for (var i = 0;i<followLength;i++) {
-//           User.findOne({username: user.following[i]},function(error, follower) {
-//             if (error) {
-//               console.log(error);
-//               followLength = followLength - 1;
-//             } else {
-//               array.push(follower);
-//               length +=1;
-//               if(length === followLength){
-//                 res.render('users', {
-//                   title: 'Friends',
-//                   users: array,
-//                   user: req.user
-//                 });
-//               }
-//             }
-//           });
-//         }
-//       } else {
-//         res.redirect('/auth/home');
-//       }
-//     }
-//   });
-// });
 
 /* GET User's Spaces */
 router.get('/all', isAuthenticated, function(req, res) {

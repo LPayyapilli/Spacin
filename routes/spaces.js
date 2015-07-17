@@ -16,7 +16,8 @@ var isAuthenticated = function(req, res, next) {
   if (req.isAuthenticated())
     return next();
   // if the user is not authenticated then redirect him to the login page
-  res.redirect('/');
+  res.send(400);
+  res.end();
 }
 
 var aws_access_key =  process.env.AWS_ACCESS_KEY_ID;
@@ -46,15 +47,12 @@ var create_s3_upload_policy = function(){
 
   // stringify and encode the policy
   var stringPolicy = JSON.stringify(s3Policy);
-  // console.log("policy:",stringPolicy);
   var base64Policy = Buffer(stringPolicy, "utf-8").toString("base64");
-  // console.log("policy ",base64Policy);
   var token = {
     policy: base64Policy,
     signature: s3_upload_signature(base64Policy),
     key: aws_access_key
   }
-  // console.log(token);
   return token;
 }
 
@@ -75,6 +73,7 @@ router.post('/new', isAuthenticated, function(req, res) {
   newSpace.name = req.body.name;
   newSpace._creator = req.user.username;
   newSpace.postedAt = new Date();
+  newSpace.zip = req.body.address.zip;
 
   if (req.body.src) {
     newSpace.pictures.push({
@@ -135,6 +134,19 @@ router.get('/_id', isAuthenticated, function(req, res) {
   });
 });
 
+router.post('/search', isAuthenticated, function(req, res) {
+  console.log(req.body.zip);
+  Space.find({
+    zip: req.body.zip
+  }).exec( function(error, spaceList) {
+    if(error) {
+      console.log(error);
+      res.status(404);
+      res.end();
+    }
+    res.send(spaceList);
+  });
+});
 
 
 module.exports = router;

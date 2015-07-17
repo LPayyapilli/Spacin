@@ -14,7 +14,7 @@ var addressSchema = new mongoose.Schema({
     required: true
   },
   zip: {
-    type: Number,
+    type: String,
     required: true
   }
 });
@@ -49,6 +49,10 @@ var spaceSchema = new mongoose.Schema({
   },
   postedAt: {
     type: Date,
+    required: true
+  },
+  zip: {
+    type: String,
     required: true
   },
   pictures: [pictureSchema],
