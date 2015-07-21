@@ -36,10 +36,10 @@ var loginRoute = require('./routes/auth.js')(passport);
 app.use('/auth', loginRoute);
 
 var userRoutes = require('./routes/users.js');
-app.use('/user', userRoutes);
+app.use('/spacin_front/user', userRoutes);
 
 var spaceRoutes = require('./routes/spaces.js');
-app.use('/space', spaceRoutes);
+app.use('/spacin_front/space', spaceRoutes);
 
 var deleteRoutes = require('./routes/delete.js');
 app.use('/delete', deleteRoutes);

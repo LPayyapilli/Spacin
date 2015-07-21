@@ -20,6 +20,8 @@ var isAuthenticated = function(req, res, next) {
   res.end();
 }
 
+/* Upload a picture */
+
 var aws_access_key =  process.env.AWS_ACCESS_KEY_ID;
 var aws_secret_key = process.env.AWS_SECRET_KEY_ID;
 
@@ -40,8 +42,6 @@ var create_s3_upload_policy = function(){
       {"acl": "public-read"},
       ["starts-with", "$Content-Type", ""],
       [ "content-length-range", 0, 20 * 1024 * 1024 ]
-      // ,
-      // ["starts-with", "$success_action_redirect", "http://localhost:3050/picture/save"]
     ]
   };
 
