@@ -56,6 +56,7 @@ var create_s3_upload_policy = function(){
   return token;
 }
 
+/* GET for AWS-NG Upload */
 router.get('/s3access', isAuthenticated, function(req, res){
   var token = create_s3_upload_policy();
   res.json(token);
@@ -63,7 +64,7 @@ router.get('/s3access', isAuthenticated, function(req, res){
 
 
 
-/* Create a Space */
+/* POST a Space */
 
 router.post('/new', isAuthenticated, function(req, res) {
   console.log(req.body);
