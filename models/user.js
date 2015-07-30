@@ -48,7 +48,8 @@ var userSchema = new mongoose.Schema({
   backgroundPicture: {
     type: String,
     ref: 'Picture'
-  }
+  },
+  // spaces: [spaceSchema]
 });
 
 userSchema.plugin(passportLocalMongoose);
