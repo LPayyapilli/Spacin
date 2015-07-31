@@ -39,7 +39,7 @@ var userRoutes = require('./routes/users.js');
 app.use('/user', userRoutes);
 
 var spaceRoutes = require('./routes/spaces.js');
-app.use('/spacin_front/space', spaceRoutes);
+app.use('/space', spaceRoutes);
 
 var deleteRoutes = require('./routes/delete.js');
 app.use('/delete', deleteRoutes);
