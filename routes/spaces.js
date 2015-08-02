@@ -165,6 +165,28 @@ router.post('/search', isAuthenticated, function(req, res) {
   });
 });
 
+//////////////////// POST a Message//////////////////////
+/////////////////////////////////////////////////////////
+router.post('/message/new', isAuthenticated, function(req, res) {
 
+  var newMessage = new Message();
+
+  newMessage.title = req.body.title;
+  newMessage._creator = req.user.username;
+  newMessage.postedAt = new Date();
+  newMessage.body = req.body.body;
+
+  newMessage.save(function(err) {
+    if (err) {
+      console.log('Error in Saving status: ' + err);
+      res.end();
+      throw err;
+    } else {
+      console.log('picture saved!');
+      res.send(200);
+      res.end();
+    }
+  });
+});
 
 module.exports = router;

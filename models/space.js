@@ -1,5 +1,29 @@
 var mongoose = require('mongoose');
 
+var messageSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true
+  },
+  body: {
+    type: String,
+    required: true
+  },
+  _creator: {
+    type: String,
+    ref: 'User'
+  },
+  postedAt: {
+    type: Date,
+    required: true
+  },
+  recipient: {
+    type: String,
+    ref: 'User'
+  }
+});
+
+
 var addressSchema = new mongoose.Schema({
   number: {
     type: Number,
@@ -61,7 +85,8 @@ var spaceSchema = new mongoose.Schema({
     type: String,
     required: true,
     enum:['Bar', 'Cafe', 'Work/Office', 'Home/Residential']
-}
+  },
+  messages: [messageSchema]
 });
 var Space = mongoose.model('space', spaceSchema);
 
