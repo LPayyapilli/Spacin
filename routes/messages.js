@@ -20,7 +20,7 @@ var isAuthenticated = function(req, res, next) {
 
 //////////////////// POST a Message//////////////////////
 /////////////////////////////////////////////////////////
-router.post('/new', isAuthenticated, function(req, res) {
+router.post('/message/new', isAuthenticated, function(req, res) {
   var newMessage = new Message();
 
   newMessage.title = req.body.title;
