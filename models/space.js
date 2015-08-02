@@ -61,8 +61,7 @@ var spaceSchema = new mongoose.Schema({
     type: String,
     required: true,
     enum:['Bar', 'Cafe', 'Work/Office', 'Home/Residential']
-},
-  messages: [messageSchema]
+}
 });
 var Space = mongoose.model('space', spaceSchema);
 
