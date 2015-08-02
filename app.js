@@ -41,8 +41,8 @@ app.use('/user', userRoutes);
 var spaceRoutes = require('./routes/spaces.js');
 app.use('/space', spaceRoutes);
 
-// var messageRoutes = require('./routes/messages.js');
-// app.use('/message', messageRoutes);
+var messageRoutes = require('./routes/messages.js');
+app.use('/message', messageRoutes);
 
 
 // catch 404 and forward to error handler
