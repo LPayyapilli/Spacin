@@ -44,8 +44,8 @@ app.use('/space', spaceRoutes);
 var deleteRoutes = require('./routes/delete.js');
 app.use('/delete', deleteRoutes);
 
-// var messageRoutes = require('./routes/messages.js');
-// app.use('/message', messageRoutes);
+var messageRoutes = require('./routes/messages.js');
+app.use('/message', messageRoutes);
 
 
 
