@@ -130,7 +130,7 @@ router.get('/_id', isAuthenticated, function(req, res) {
       res.status(404);
       res.end();
     }
-    res.send(spaces);
+    res.send(space);
   });
 });
 
