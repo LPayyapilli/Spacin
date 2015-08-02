@@ -4,7 +4,6 @@ var User = require('../models/user.js');
 var async = require('async');
 var Space = require('../models/space.js');
 var fs = require('fs');
-var multer = require('multer');
 var AWS = require('aws-sdk');
 var bodyParser = require('body-parser');
 var crypto =require('crypto');
