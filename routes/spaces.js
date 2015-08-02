@@ -103,7 +103,7 @@ router.post('/new', isAuthenticated, function(req, res) {
   });
 });
 
-/////////////GET All Spaces/////////////////
+///////////////////GET All Spaces///////////////////////
 ////////////////////////////////////////////////////////
 router.get('/all', isAuthenticated, function(req, res) {
   Space.find({
