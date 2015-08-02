@@ -44,6 +44,9 @@ app.use('/space', spaceRoutes);
 var deleteRoutes = require('./routes/delete.js');
 app.use('/delete', deleteRoutes);
 
+var inboxRoutes = require('./routes/messages.js');
+app.use('/message', inboxRoutes);
+
 
 
 // catch 404 and forward to error handler

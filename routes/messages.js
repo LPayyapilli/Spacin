@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var async = require('async');
 var Message = require('../models/message.js');
+var User = require('../models/user.js');
+var Space = require('../models/space.js');
 var fs = require('fs');
 var AWS = require('aws-sdk');
 var bodyParser = require('body-parser');
@@ -20,13 +22,13 @@ var isAuthenticated = function(req, res, next) {
 
 //////////////////// POST a Message//////////////////////
 /////////////////////////////////////////////////////////
-router.post('/message/new', isAuthenticated, function(req, res) {
+router.post('/new', isAuthenticated, function(req, res) {
 
   var newMessage = new Message();
 
   newMessage.title = req.body.title;
-  // newMessage._creator = req.user.username;
-  // newMessage.postedAt = new Date();
+  newMessage._creator = req.user.username;
+  newMessage.postedAt = new Date();
   newMessage.body = req.body.body;
 
   newMessage.save(function(err) {
