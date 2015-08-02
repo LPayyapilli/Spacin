@@ -103,10 +103,27 @@ router.post('/new', isAuthenticated, function(req, res) {
   });
 });
 
-/////////////GET All Spaces from a User/////////////////
+/////////////GET All Spaces/////////////////
 ////////////////////////////////////////////////////////
 router.get('/all', isAuthenticated, function(req, res) {
   Space.find({
+    })
+    .sort('-postedAt')
+    .exec( function(error, spaces) {
+      if (error) {
+        console.log(error);
+        res.status(404);
+        res.end();
+      }
+      res.send(spaces);
+  });
+});
+
+/////////////GET All Spaces from a User/////////////////
+////////////////////////////////////////////////////////
+router.get('/user/all', isAuthenticated, function(req, res) {
+  Space.find({
+      _creator: req.user.username
     })
     .sort('-postedAt')
     .exec( function(error, spaces) {
