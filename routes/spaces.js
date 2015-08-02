@@ -103,11 +103,10 @@ router.post('/new', isAuthenticated, function(req, res) {
   });
 });
 
-/////////////////////GET All Spaces/////////////////////
+/////////////GET All Spaces from a User/////////////////
 ////////////////////////////////////////////////////////
 router.get('/all', isAuthenticated, function(req, res) {
   Space.find({
-      _creator: req.user.username
     })
     .sort('-postedAt')
     .exec( function(error, spaces) {
@@ -135,6 +134,8 @@ router.get('/_id', isAuthenticated, function(req, res) {
   });
 });
 
+/////////////////////GET Space by Zip///////////////////
+////////////////////////////////////////////////////////
 router.post('/search', isAuthenticated, function(req, res) {
   console.log(req.body.zip);
   Space.find({
@@ -148,6 +149,7 @@ router.post('/search', isAuthenticated, function(req, res) {
     res.send(spaceList);
   });
 });
+
 
 
 module.exports = router;

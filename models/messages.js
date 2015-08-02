@@ -1,7 +1,11 @@
 var mongoose = require('mongoose');
 
 var messageSchema = new mongoose.Schema({
-  input: {
+  title: {
+    type: String,
+    required: true
+  },
+  body: {
     type: String,
     required: true
   },
@@ -13,10 +17,10 @@ var messageSchema = new mongoose.Schema({
     type: Date,
     required: true
   },
-  conversation: {
-
-  },
-  recipients: []
+  recipient: {
+    type: String,
+    ref: 'User'
+  }
 });
 
 

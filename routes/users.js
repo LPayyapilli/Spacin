@@ -28,7 +28,7 @@ router.get('/users', isAuthenticated, function(req, res) {
   });
 });
 
-/* PATCH to Profile Picture */
+/* POST to Profile Picture */
 router.post('/newProfPic', isAuthenticated, function(req, res) {
   User.findOneAndUpdate({
        username: req.user.username
@@ -44,7 +44,7 @@ router.post('/newProfPic', isAuthenticated, function(req, res) {
    });
 });
 
-/* PATCH to Background Picture */
+/* POST to Background Picture */
 
 router.post('/newBackPic', isAuthenticated, function(req, res) {
   User.findOneAndUpdate({

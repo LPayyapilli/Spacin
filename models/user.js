@@ -32,8 +32,6 @@ var userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  following: [],
-  followedBy: [],
   age: {
     type: String,
   },
@@ -48,8 +46,7 @@ var userSchema = new mongoose.Schema({
   backgroundPicture: {
     type: String,
     ref: 'Picture'
-  },
-  // spaces: [spaceSchema]
+  }
 });
 
 userSchema.plugin(passportLocalMongoose);
