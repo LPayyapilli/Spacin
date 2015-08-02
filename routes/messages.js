@@ -21,11 +21,12 @@ var isAuthenticated = function(req, res, next) {
 //////////////////// POST a Message//////////////////////
 /////////////////////////////////////////////////////////
 router.post('/message/new', isAuthenticated, function(req, res) {
+
   var newMessage = new Message();
 
   newMessage.title = req.body.title;
-  newMessage._creator = req.user.username;
-  newMessage.postedAt = new Date();
+  // newMessage._creator = req.user.username;
+  // newMessage.postedAt = new Date();
   newMessage.body = req.body.body;
 
   newMessage.save(function(err) {

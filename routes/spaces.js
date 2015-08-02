@@ -66,7 +66,6 @@ router.get('/s3access', isAuthenticated, function(req, res){
 /* POST a Space */
 
 router.post('/new', isAuthenticated, function(req, res) {
-  console.log(req.body);
   var newSpace = new Space();
 
   newSpace.caption = req.body.caption;
