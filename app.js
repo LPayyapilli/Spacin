@@ -19,7 +19,7 @@ mongoose.connect(config.mongo.dbUrl);
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
-app.use(cors({origin:'https://lpayyapilli.github.io/spacin_front', credentials: true}));
+app.use(cors({origin:'http://lpayyapilli.github.io', credentials: true}));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({extended: true}));
@@ -41,8 +41,8 @@ app.use('/user', userRoutes);
 var spaceRoutes = require('./routes/spaces.js');
 app.use('/space', spaceRoutes);
 
-var messageRoutes = require('./routes/messages.js');
-app.use('/message', messageRoutes);
+// var messageRoutes = require('./routes/messages.js');
+// app.use('/message', messageRoutes);
 
 
 // catch 404 and forward to error handler
