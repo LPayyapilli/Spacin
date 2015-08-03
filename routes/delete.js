@@ -1,11 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user.js');
-// var Status = require('../models/status.js');
 var Picture = require('../models/picture.js');
 
-// var Conversation = require('../models/conversation.js');
 
+/* Authenticates User */
 var isAuthenticated = function(req, res, next) {
   if (req.isAuthenticated()){
     return next();
@@ -48,20 +47,5 @@ router.delete('/space/:spaceID', isAuthenticated, function(req, res) {
   });
 });
 
-/* Delete Conversation */
-// router.delete('/convo/:convoID', isAuthenticated, function(req, res) {
-//   Conversation.remove({
-//     _id: req.params.convoID
-//   })
-//   .exec(function(error) {
-//     if (error) {
-//       console.log(error);
-//       res.status(404);
-//       res.end();
-//     }
-//     res.status(204);
-//     res.end();
-//   });
-// });
 
 module.exports = router

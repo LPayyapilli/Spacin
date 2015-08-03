@@ -16,13 +16,6 @@ var isAuthenticated = function(req, res, next) {
 
 module.exports = function(passport) {
 
-  // /* GET login page. */
-  // router.get('/', function(req, res) {
-  //   // Display the Login page with any flash message, if any
-  //  res.status(200);
-  //  res.end();
-  // });
-
    /* Handle Login POST */
   router.post('/login', passport.authenticate('login'), function(req, res) {
     res.status(200);
@@ -34,11 +27,6 @@ module.exports = function(passport) {
     res.status(200);
     res.end();
   });
-
-  // /* GET Profile Page */
-  // router.get('/user', isAuthenticated, function(req, res) {
-  //   res.send(req.user);
-  // });
 
   /* Handle Logout */
   router.get('/signout', function(req, res) {

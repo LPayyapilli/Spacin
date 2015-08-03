@@ -15,10 +15,6 @@ var config = require('./config');
 var app = express();
 mongoose.connect(config.mongo.dbUrl);
 
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-
 app.use(cors({origin:'http://lpayyapilli.github.io', credentials: true}));
 
 // app.use(cors({origin:'http://localhost:5000', credentials: true}));
@@ -30,19 +26,23 @@ app.use(express_session({secret: 'helloWorld', resave: false, saveUninitialized:
 app.use(passport.initialize());
 app.use(passport.session());
 
+/* Routing for each model */
 var initPassport = require('./passport/init');
 initPassport(passport);
 
-// Login Route
+/* Login Routes */
 var loginRoute = require('./routes/auth.js')(passport);
 app.use('/auth', loginRoute);
 
+/* User Routes */
 var userRoutes = require('./routes/users.js');
 app.use('/user', userRoutes);
 
+/* Space Routes */
 var spaceRoutes = require('./routes/spaces.js');
 app.use('/space', spaceRoutes);
 
+/* Delete Routes */
 var deleteRoutes = require('./routes/delete.js');
 app.use('/delete', deleteRoutes);
 

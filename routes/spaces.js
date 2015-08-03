@@ -102,8 +102,7 @@ router.post('/new', isAuthenticated, function(req, res) {
   });
 });
 
-/////////////GET All Spaces/////////////////
-////////////////////////////////////////////////////////
+/* Get All Spaces */
 router.get('/all', isAuthenticated, function(req, res) {
   Space.find({
     })
@@ -118,8 +117,7 @@ router.get('/all', isAuthenticated, function(req, res) {
   });
 });
 
-/////////////GET All Spaces from a User/////////////////
-////////////////////////////////////////////////////////
+/* Get All Spaces for a User */
 router.get('/user/all', isAuthenticated, function(req, res) {
   Space.find({
       _creator: req.user.username
@@ -135,8 +133,7 @@ router.get('/user/all', isAuthenticated, function(req, res) {
   });
 });
 
-/////////////////////GET One Space//////////////////////
-////////////////////////////////////////////////////////
+/* Get One Space for a User */
 router.get('/_id', isAuthenticated, function(req, res) {
   Space.findOne({
     _id: req.params._id
@@ -150,8 +147,7 @@ router.get('/_id', isAuthenticated, function(req, res) {
   });
 });
 
-/////////////////////GET Space by Zip///////////////////
-////////////////////////////////////////////////////////
+/* Get Space by Zip */
 router.post('/search', isAuthenticated, function(req, res) {
   console.log(req.body.zip);
   Space.find({
@@ -166,8 +162,7 @@ router.post('/search', isAuthenticated, function(req, res) {
   });
 });
 
-//////////////////// POST a Message//////////////////////
-/////////////////////////////////////////////////////////
+/* Post a Message */
 router.post('/message/new', isAuthenticated, function(req, res) {
 
   var newMessage = new Message();
