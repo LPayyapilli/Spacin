@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user.js');
+var Message = require('../models/message.js');
 var async = require('async');
 var Space = require('../models/space.js');
 var fs = require('fs');
@@ -172,8 +173,8 @@ router.post('/message/new', isAuthenticated, function(req, res) {
   var newMessage = new Message();
 
   newMessage.title = req.body.title;
-  // newMessage._creator = req.user.username;
-  // newMessage.postedAt = new Date();
+  newMessage._creator = req.user.username;
+  newMessage.postedAt = new Date();
   newMessage.body = req.body.body;
 
   newMessage.save(function(err) {
@@ -182,7 +183,8 @@ router.post('/message/new', isAuthenticated, function(req, res) {
       res.end();
       throw err;
     } else {
-      console.log('picture saved!');
+      console.log('message saved!');
+      console.log(res.body);
       res.send(200);
       res.end();
     }

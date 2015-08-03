@@ -20,6 +20,10 @@ var messageSchema = new mongoose.Schema({
   recipient: {
     type: String,
     ref: 'User'
+  },
+  space: {
+    type: String,
+    ref: 'Space'
   }
 });
 

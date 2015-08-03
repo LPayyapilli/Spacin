@@ -20,6 +20,8 @@ mongoose.connect(config.mongo.dbUrl);
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 app.use(cors({origin:'http://lpayyapilli.github.io', credentials: true}));
+
+// app.use(cors({origin:'http://localhost:5000', credentials: true}));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded({extended: true}));
