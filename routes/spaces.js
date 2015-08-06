@@ -165,6 +165,7 @@ router.post('/search', isAuthenticated, function(req, res) {
 /* Post a Message */
 router.post('/message/new', isAuthenticated, function(req, res) {
 
+console.log(req.user.username);
   var newMessage = new Message();
 
   newMessage.title = req.body.title;
@@ -179,7 +180,7 @@ router.post('/message/new', isAuthenticated, function(req, res) {
       throw err;
     } else {
       console.log('message saved!');
-      console.log(res.body);
+      console.log(res);
       res.send(200);
       res.end();
     }
