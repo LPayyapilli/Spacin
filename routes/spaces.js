@@ -135,6 +135,7 @@ router.get('/user/all', isAuthenticated, function(req, res) {
 
 /* Get One Space for a User */
 router.get('/_id', isAuthenticated, function(req, res) {
+  console.log(req.params._id);
   Space.findOne({
     _id: req.params._id
   }).exec( function(error, space) {
@@ -163,28 +164,39 @@ router.post('/search', isAuthenticated, function(req, res) {
 });
 
 /* Post a Message */
-router.post('/message/new', isAuthenticated, function(req, res) {
-
-console.log(req.user.username);
-  var newMessage = new Message();
-
-  newMessage.title = req.body.title;
-  newMessage._creator = req.user.username;
-  newMessage.postedAt = new Date();
-  newMessage.body = req.body.body;
-
-  newMessage.save(function(err) {
-    if (err) {
-      console.log('Error in Saving status: ' + err);
+router.post('/message/new/_id', isAuthenticated, function(req, res) {
+console.log(req.params._id);
+  Space.findOne({
+      _id:req.params._id
+  }).exec(function(error, space) {
+    if (error) {
+      console.log(error);
+      res.status(404);
       res.end();
-      throw err;
     } else {
-      console.log('message saved!');
-      console.log(res);
-      res.send(200);
-      res.end();
-    }
+      var newMessage = new Message();
+
+      newMessage.title = req.body.title;
+      newMessage._creator = req.user.username;
+      newMessage.postedAt = new Date();
+      newMessage.body = req.body.body;
+      newMessage.recipient = space._creator;
+
+      newMessage.save(function(err) {
+        if (err) {
+          console.log('Error in Saving status: ' + err);
+          res.end();
+          throw err;
+        } else {
+          console.log('message saved!');
+          console.log(res);
+          res.send(200);
+          res.end();
+        }
+      });
+    };
   });
 });
+
 
 module.exports = router;
